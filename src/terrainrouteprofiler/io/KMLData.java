@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 ms6401.
+ * Copyright 2014 Marvin Smith <marvin_smith1@me.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,43 +22,51 @@
  * THE SOFTWARE.
  */
 
-package terrainrouteprofiler.geographic;
+package terrainrouteprofiler.io;
 
-import java.io.File;
 import java.util.ArrayList;
-import terrainrouteprofiler.io.KMLData;
-import terrainrouteprofiler.io.KMLParser;
+import terrainrouteprofiler.geographic.CoordinateGeodetic;
 
 /**
  *
- * @author ms6401
+ * @author Marvin Smith <marvin_smith1@me.com>
  */
-public class RouteContainer {
-    
-    /// List of coordinates in order
-    private ArrayList<CoordinateGeodetic> m_pointList;
-    
-    
-    /**
-     * Constructor
-     */
-    public RouteContainer(){
-    
-        // initialize the point list
-        m_pointList = new ArrayList<>();
-        
-    }
+public class KMLData {
 
-    /**
-     * Import the route given in the format of a Google KML File.
-     * @param pathname Path to the KML file
-     */
-    public void importRouteKML(String pathname ) {
+    private ArrayList<CoordinateGeodetic> m_pathPoints;
+    
+    private KMLParserState m_stateFlag;
+    
+    public KMLData(){
+        m_pathPoints = new ArrayList<>();
         
-        // open a KML file parser and import all points
-        KMLData kmlData = KMLParser.readKMLFile(new File(pathname));
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        m_stateFlag = KMLParserState.KMLReadFailed;
     }
     
+    /**
+     * Get the KML Data
+     * @return 
+     */
+    public ArrayList<CoordinateGeodetic> getPathPoints(){
+        return m_pathPoints;
+    }
+    
+    /**
+     * Set the KML Data
+     */
+    public void setPathPoints( ArrayList<CoordinateGeodetic> pathPoints ){
+        this.m_pathPoints = pathPoints;
+    }
+    
+    public KMLParserState getStateFlag(){
+        return this.m_stateFlag;
+    }
+    
+    public void setStateFlag( KMLParserState stateFlag ){
+        this.m_stateFlag = stateFlag;
+    }
+    
+    public void push_back( CoordinateGeodetic point ){
+        this.m_pathPoints.add( point );
+    }
 }

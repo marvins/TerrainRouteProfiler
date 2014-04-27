@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 ms6401.
+ * Copyright 2014 Marvin Smith <marvin_smith1@me.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,43 +22,13 @@
  * THE SOFTWARE.
  */
 
-package terrainrouteprofiler.geographic;
-
-import java.io.File;
-import java.util.ArrayList;
-import terrainrouteprofiler.io.KMLData;
-import terrainrouteprofiler.io.KMLParser;
+package terrainrouteprofiler.io;
 
 /**
  *
- * @author ms6401
+ * @author Marvin Smith <marvin_smith1@me.com>
  */
-public class RouteContainer {
-    
-    /// List of coordinates in order
-    private ArrayList<CoordinateGeodetic> m_pointList;
-    
-    
-    /**
-     * Constructor
-     */
-    public RouteContainer(){
-    
-        // initialize the point list
-        m_pointList = new ArrayList<>();
-        
-    }
-
-    /**
-     * Import the route given in the format of a Google KML File.
-     * @param pathname Path to the KML file
-     */
-    public void importRouteKML(String pathname ) {
-        
-        // open a KML file parser and import all points
-        KMLData kmlData = KMLParser.readKMLFile(new File(pathname));
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+public enum KMLParserState {
+    KMLReadFailed,
+    KMLReadSuccess;
 }
