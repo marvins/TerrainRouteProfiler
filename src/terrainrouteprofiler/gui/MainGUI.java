@@ -26,7 +26,6 @@ public class MainGUI extends javax.swing.JFrame {
     /**
      * Create required global variables
      */
-    //RouteContainer routeInfo = new RouteContainer();
     //ProfileWriter writer = new ProfileWriter();
     //ConfigurationManager options = new ConfigurationManager();
 
@@ -487,7 +486,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
 
         //update the user interface
-        //update_gui();
+        update_gui();
     }
 
     /**
@@ -496,8 +495,8 @@ public class MainGUI extends javax.swing.JFrame {
     private void update_gui() {
 
         //update the filename 
-        //currentKMLFileVal.setText(routeInfo.kml_filename);
-
+        currentKMLFileVal.setText(m_kmlFilePath);
+        
         //compute the total distance between points
         //routeDistanceText.setText(String.format("%.4f", routeInfo.distance) + "m");
 

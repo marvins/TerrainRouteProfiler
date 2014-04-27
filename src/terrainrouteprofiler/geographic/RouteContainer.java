@@ -39,6 +39,9 @@ public class RouteContainer {
     /// List of coordinates in order
     private ArrayList<CoordinateGeodetic> m_pointList;
     
+    /// Total Distance Travelled
+    private double m_distance;
+    
     
     /**
      * Constructor
@@ -62,7 +65,12 @@ public class RouteContainer {
         // add the points to the point list
         m_pointList.addAll(kmlData.getPathPoints());
         
-        
+        // update the length of the route
+        //find the full distance
+        m_distance = 0;
+        for( int i=0; i<m_pointList.size()-1; i++) {
+            m_distance += Vincenty.distanceMeters(m_pointList.get(i), m_pointList.get(i+1));
+        }
     }
 
     /**
