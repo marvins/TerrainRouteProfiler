@@ -16,6 +16,7 @@ import terrainrouteprofiler.gui.MainGUI;
 public class TerrainRouteProfiler {
 
     /**
+     * Main Driver
      * @param args the command line arguments
      */
     public static void main(String[] args) {

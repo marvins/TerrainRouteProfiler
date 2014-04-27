@@ -6,15 +6,16 @@ package terrainrouteprofiler.gui;
 
 //import elevationprofiler.FormatType;
 //import elevationprofiler.geographic.GeodeticDD;
-//import elevationprofiler.geographic.RouteContainer;
 //import elevationprofiler.io.ConfigurationManager;
 //import elevationprofiler.io.ProfileWriter;
+
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import terrainrouteprofiler.geographic.RouteContainer;
 
 /**
  *
@@ -29,10 +30,36 @@ public class MainGUI extends javax.swing.JFrame {
     //ProfileWriter writer = new ProfileWriter();
     //ConfigurationManager options = new ConfigurationManager();
 
+    /// This is the current working directory for the program
+    private String m_currentWorkingDirectory;
+    
+    /// This is the kml file path that we are going to use
+    private String m_kmlFilePath;
+    
+    /// This is the container for storing and computing our route
+    private RouteContainer m_routeContainer;
+    
+    /**
+     * Set a default configuration
+     */
+    private void setDefaultOptions(){
+    
+        /// use this directory as CWD
+        m_currentWorkingDirectory = ".";
+        
+        /// set the file path to null
+        m_kmlFilePath = null;
+        
+        /// Create the route container
+        m_routeContainer = new RouteContainer();
+        
+    }
+    
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
+        setDefaultOptions();
         initComponents();
     }
 
@@ -434,23 +461,30 @@ public class MainGUI extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         
         //set the current directory
-        //fc.setCurrentDirectory(new File(options.current_directory));
+        fc.setCurrentDirectory(new File(this.m_currentWorkingDirectory));
 
         //show the dialog and get user input
-        //int returnVal = fc.showOpenDialog(this);
-        //if (returnVal == JFileChooser.APPROVE_OPTION) {
-            //File file = fc.getSelectedFile();
-            //options.current_directory = file.getPath();
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            
+            // grab the selected file
+            File file = fc.getSelectedFile();
+            
+            // set the working directory to where the kml file is
+            m_currentWorkingDirectory = file.getPath();
+            
+            // get the file path for the KML file
+            try {
+                m_kmlFilePath = file.getCanonicalPath();
+            } catch (IOException e) {
+                System.out.println("ERROR: " + e.getMessage());
+                System.exit(1);
+            }
 
-            //try {
-            //    routeInfo.kml_filename = file.getCanonicalPath();
-            //} catch (IOException e) {
-            //    System.out.println("ERROR: " + e.getMessage());
-            //}
+            // construct the route
+            m_routeContainer.importRouteKML(file.getAbsolutePath());
 
-            //routeInfo.buildRoute(file.getAbsolutePath());
-
-        //}
+        }
 
         //update the user interface
         //update_gui();
