@@ -26,6 +26,7 @@ package terrainrouteprofiler.geographic;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import terrainrouteprofiler.io.KMLData;
 import terrainrouteprofiler.io.KMLParser;
 
@@ -58,7 +59,17 @@ public class RouteContainer {
         // open a KML file parser and import all points
         KMLData kmlData = KMLParser.readKMLFile(new File(pathname));
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // add the points to the point list
+        m_pointList.addAll(kmlData.getPathPoints());
+        
+        
+    }
+
+    /**
+     * Get the size of the route
+     */
+    public int size(){
+        return m_pointList.size();
     }
     
 }

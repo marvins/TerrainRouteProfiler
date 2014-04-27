@@ -61,12 +61,19 @@ public class KMLParserStateTest {
      */
     @Test
     public void testValues() {
+        
+        // test tehe values
         System.out.println("values");
-        KMLParserState[] expResult = null;
+        
+        // create our test container
+        KMLParserState array[] = new KMLParserState[2];
+        array[0] = KMLParserState.KMLReadSuccess;
+        array[1] = KMLParserState.KMLReadFailed;
+        
+        // call the function in question
         KMLParserState[] result = KMLParserState.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertArrayEquals(array, result);
+        
     }
 
     /**
@@ -74,13 +81,13 @@ public class KMLParserStateTest {
      */
     @Test
     public void testValueOf() {
+        
         System.out.println("valueOf");
-        String name = "";
-        KMLParserState expResult = null;
-        KMLParserState result = KMLParserState.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // test value of
+        assertEquals( KMLParserState.valueOf("KMLReadFailed"), KMLParserState.KMLReadFailed);
+        assertEquals( KMLParserState.valueOf("KMLReadSuccess"), KMLParserState.KMLReadSuccess);
+        
     }
     
 }

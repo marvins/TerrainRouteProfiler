@@ -22,13 +22,59 @@
  * THE SOFTWARE.
  */
 
-package terrainrouteprofiler.io;
+package terrainrouteprofiler.geographic;
+
+import java.io.File;
+import org.junit.After;
+import org.junit.AfterClass;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
  * @author Marvin Smith <marvin_smith1@me.com>
  */
-public enum KMLParserState {
-    KMLReadSuccess,
-    KMLReadFailed;
+public class RouteContainerTest {
+    
+    public RouteContainerTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     * Test of importRouteKML method, of class RouteContainer.
+     */
+    @Test
+    public void testImportRouteKML() {
+        
+        // print the main header
+        System.out.println("importRouteKML");
+        
+        // create the Route Container
+        RouteContainer instance = new RouteContainer();
+        
+        // set the pathname
+        instance.importRouteKML("data/Road_NATC_Home.kml");
+        
+        // check that the new container size is 151
+        assertEquals(instance.size(), 151);
+        
+    }
+    
 }
